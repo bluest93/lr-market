@@ -13,23 +13,33 @@ works for a first pass.
 
 ## Quick start
 
+Uses [uv](https://docs.astral.sh/uv/) — it creates the virtualenv and installs
+the pinned dependencies (`uv.lock`) automatically on the first `uv run`.
+
 ```bash
-pip install -r requirements.txt
+uv sync
 
 # 1. Validate the analysis pipeline on synthetic data with KNOWN half-lives
-python simulate.py --out data_sim --hours 2
-python analyze.py --data-dir data_sim --out-dir results_sim
+uv run python simulate.py --out data_sim --hours 2
+uv run python analyze.py --data-dir data_sim --out-dir results_sim
 
 # 2. Collect real data (run 24-48h minimum; sync your clock with chrony first)
-python collect.py --data-dir data
+uv run python collect.py --data-dir data
 
-# 3. Analyze real data
-python analyze.py --data-dir data --out-dir results
+# 3. Analyze real data (two stages: 100 ms detection, then 1 ms refit)
+uv run python analyze.py --data-dir data --out-dir results --fetch-latency
+uv run python refine_events.py --data-dir data --events results/events.csv \
+    --out results/refined_events.csv --grid-ms 1
+
+# 4. Results notebook (figures, venue-effects model, robustness checks)
+uv run jupyter lab notebooks/lr_market_results.ipynb
 ```
 
 Outputs: `events.csv` (every detected dislocation with duration, peak size in
-bps, fitted half-life, fit quality), `summary.csv` (per-pair medians joined
-with great-circle light-time between venues), and `summary.png`.
+bps, fitted half-life, fit quality), `refined_events.csv` (the same events
+re-measured at 1 ms, under two fitting conventions), `summary.csv` (per-pair
+medians joined with great-circle light-time and measured network RTT between
+venues), and `summary.png`.
 
 ## Methodology
 
