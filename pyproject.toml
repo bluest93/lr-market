@@ -1,0 +1,22 @@
+[project]
+name = "lr-market"
+version = "0.1.0"
+description = "Lieb-Robinson bounds for the market microstructure graph: cross-exchange BTC convergence measurement"
+authors = [{ name = "Wai-Hong Tam (Blues)" }]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "websockets>=12",     # collect.py: exchange WebSocket feeds
+    "pandas>=2.2",        # analyze.py / refine_events.py
+    "numpy>=1.24",
+    "matplotlib>=3.9",
+]
+
+[dependency-groups]
+dev = [
+    "jupyter",            # lr_market_results.ipynb
+]
+
+# No [build-system]: uv treats this as an unpackaged project (scripts, not a
+# library) and manages the venv + dependencies without trying to build it.
