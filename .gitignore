@@ -1,0 +1,6 @@
+data_week/
+data_sim/
+data/
+.venv/
+__pycache__/
+*.html

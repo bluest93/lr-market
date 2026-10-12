@@ -1,0 +1,22 @@
+{
+  "NF_RAW_DIR": "data_week",
+  "NF_EVENT_TABLE": "results_week/events.csv",
+  "NF_OUTPUT_DIR": "results_noise_floor_1ms",
+  "NF_GRID_MS": 1.0,
+  "NF_PRE_SECONDS": 60.0,
+  "NF_PRE_GRID_MS": 100.0,
+  "NF_MAX_QUOTE_AGE_S": 10.0,
+  "NF_MIN_PRE_POINTS": 30,
+  "NF_MAIN_K": 2.0,
+  "NF_K_VALUES": [
+    2.0
+  ],
+  "NF_STOP_ON_SIGN_FLIP": true,
+  "NF_MIN_SIGMA_BPS": 1e-12,
+  "NF_MIN_FIT_POINTS": 5,
+  "NF_MIN_R2": 0.5,
+  "NF_MAX_HALF_LIFE_S": 120.0,
+  "NF_MAX_EVENT_S": 120.0,
+  "NF_PRICE_CHANGE_FLAG": 3,
+  "NF_LIMIT_EVENTS": null
+}
